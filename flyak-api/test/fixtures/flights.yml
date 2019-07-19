@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from: MyString
+  to: MyString
+  departure: 2019-07-19 13:00:15
+  duration: 1
+
+two:
+  from: MyString
+  to: MyString
+  departure: 2019-07-19 13:00:15
+  duration: 1

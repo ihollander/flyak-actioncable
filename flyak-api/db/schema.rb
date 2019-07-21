@@ -20,20 +20,24 @@ ActiveRecord::Schema.define(version: 2019_07_19_170553) do
     t.string "arrive_at"
     t.datetime "departure"
     t.integer "duration"
+    t.integer "rows"
+    t.integer "seats_per_row"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "seats", force: :cascade do |t|
+    t.integer "sort"
     t.string "number"
     t.bigint "flight_id"
+    t.float "price"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["flight_id"], name: "index_seats_on_flight_id"
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string "price"
     t.bigint "user_id"
     t.bigint "seat_id"
     t.datetime "created_at", null: false

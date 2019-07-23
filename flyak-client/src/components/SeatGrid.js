@@ -2,7 +2,6 @@ import React from "react";
 import Seat from "./SeatRow";
 
 const SeatGrid = ({ rows, setSelectedSeat }) => {
-  console.log(rows);
   return rows.map(row => (
     <div key={row[0].id} className="columns">
       {row.map(seat => (

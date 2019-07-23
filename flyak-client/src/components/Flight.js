@@ -1,4 +1,5 @@
 import React from "react";
+import { ActionCableConsumer } from "react-actioncable-provider";
 import Modal from "./Modal";
 import TicketForm from "./TicketForm";
 import SeatGrid from "./SeatGrid";
@@ -73,6 +74,15 @@ class Flight extends React.Component {
             />
           </div>
         </section>
+        <ActionCableConsumer
+          channel={{ channel: "FlightChannel", flight_id: flight.id }}
+          onReceived={data => {
+            console.log(data);
+            if (data.type === "SEAT_PURCHASED") {
+              this.handleTicketBought(data.payload);
+            }
+          }}
+        />
         <Modal
           active={this.state.selectedSeatId !== null}
           closeModal={() => this.setSelectedSeat(null)}

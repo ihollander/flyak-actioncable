@@ -40,7 +40,7 @@ class App extends React.Component {
               <Flight {...props} user={this.state.currentUser} />
             )}
           />
-          <Route path="/flights" component={FlightList} />
+          <Route path="/" component={FlightList} />
         </Switch>
       </div>
     );

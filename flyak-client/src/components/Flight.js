@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "./Modal";
 import TicketForm from "./TicketForm";
+import SeatGrid from "./SeatGrid";
 
 import adapter from "../api/adapter";
 import { arrayToTwoD } from "../helpers/array";
@@ -43,30 +44,9 @@ class Flight extends React.Component {
     });
   }
 
-  renderSeats() {
+  getRows() {
     const { seats, seats_per_row } = this.state.flight;
-    const columns = arrayToTwoD(seats, seats_per_row);
-
-    return columns.map(col => (
-      <div key={col[0].id} className="columns">
-        {col.map(seat => (
-          <div key={seat.id} className="column">
-            {seat.status === "available" ? (
-              <button
-                onClick={() => this.setSelectedSeat(seat.id)}
-                className="button is-fullwidth is-primary"
-              >
-                {seat.number}
-              </button>
-            ) : (
-              <button className="button is-fullwidth is-danger">
-                {seat.number}
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-    ));
+    return arrayToTwoD(seats, seats_per_row);
   }
 
   render() {
@@ -87,7 +67,10 @@ class Flight extends React.Component {
             <h1 className="title">
               Flight: {flight.depart_from} - {flight.arrive_at}
             </h1>
-            {this.renderSeats()}
+            <SeatGrid
+              rows={this.getRows()}
+              setSelectedSeat={this.setSelectedSeat}
+            />
           </div>
         </section>
         <Modal
